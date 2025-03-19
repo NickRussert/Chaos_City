@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vote for Chaos</title>
+    <script>
+        let socket = new WebSocket("ws://localhost:8080");
+
+        function vote(choice) {
+            socket.send(JSON.stringify({ type: "vote", choice: choice }));
+            alert("Vote submitted!");
+        }
+    </script>
+</head>
+<body>
+    <h1>Vote for the Next Disaster</h1>
+    <button onclick="vote('meteor')">🌠 Meteor Shower</button>
+    <button onclick="vote('tornado')">🌪 Tornado</button>
+    <button onclick="vote('flood')">🌊 Flood</button>
+</body>
+</html>
