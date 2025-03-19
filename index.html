@@ -3,7 +3,7 @@
   <head>
     <title>Vote for Chaos</title>
     <script>
-      let socket = new WebSocket("ws://10.130.189.5:8080");
+        let socket = new WebSocket("ws://10.130.189.5:8080");
 
       function vote(choice) {
         socket.send(JSON.stringify({ type: "vote", choice: choice }));
