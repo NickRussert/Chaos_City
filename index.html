@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Vote for Chaos</title>
     <script>
-      const server = new WebSocket.Server({ host: "0.0.0.0", port: 8080 });
+        let socket = new WebSocket("ws://localhost:8080");
 
-      function vote(choice) {
-        socket.send(JSON.stringify({ type: "vote", choice: choice }));
-        alert("Vote submitted!");
-      }
+        socket.onopen = function () {
+            console.log("Connected to WebSocket server");
+        };
+
+        socket.onmessage = function (event) {
+            console.log("Message from server:", event.data);
+        };
+
+        socket.onerror = function (error) {
+            console.error("WebSocket error:", error);
+        };
+
+        function vote(choice) {
+            socket.send(JSON.stringify({ type: "vote", choice: choice }));
+            alert("Vote submitted!");
+        }
     </script>
-  </head>
-  <body>
+</head>
+<body>
     <h1>Vote for the Next Disaster</h1>
     <button onclick="vote('meteor')">🌠 Meteor Shower</button>
     <button onclick="vote('tornado')">🌪 Tornado</button>
     <button onclick="vote('flood')">🌊 Flood</button>
-  </body>
+</body>
 </html>
+
